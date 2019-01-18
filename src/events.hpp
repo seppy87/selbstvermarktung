@@ -6,6 +6,7 @@
 #include<Poco/BasicEvent.h>
 #include<Poco/Delegate.h>
 #include<modbus.h>
+#include"config.hpp"
 
 
 namespace events {

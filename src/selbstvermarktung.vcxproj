@@ -117,15 +117,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="Quelle.cpp" />
     <ClCompile Include="targets.cpp" />
     <ClCompile Include="workers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="cxxopts.hpp" />
     <ClInclude Include="events.hpp" />
+    <ClInclude Include="simpleini.h" />
     <ClInclude Include="targets.hpp" />
     <ClInclude Include="workers.hpp" />
+    <ClInclude Include="worm.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

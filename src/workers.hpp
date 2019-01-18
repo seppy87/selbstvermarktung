@@ -2,6 +2,7 @@
 
 #include"targets.hpp"
 #include"events.hpp"
+#include<array>
 
 namespace workers {
 
@@ -12,9 +13,14 @@ namespace workers {
 	};
 
 	class Netzbetreiber : public basic {
+	private:
+		events::PowerRequestInputEvent prEvent;
+		target::ReducePowerTarget redPower;
 	protected:
 		bool ErrorAbort = false;
 		bool quitRequest = false;
+	protected:
+		UINT16 getPercentage(const std::array<bool, 4> &arg);
 	public:
 		void receiveMessage(const void* pSender, std::string& msg);
 		void run();
@@ -24,15 +30,14 @@ namespace workers {
 	private:
 		bool ErrorAbort = false;
 		bool quitRequest = false;
-		std::string ip;
-		uint16_t port;
 		events::PowerMeassureResultEvent prResult;
 		target::SendConsumptionRequestTarget* crTarget;
 
 		events::PowerRequestInputEvent redEvent;
 		target::ReducePowerTarget prTarget;
+	
 	public:
-		NeXt(const char* _ip, uint16_t _port);
+		NeXt(void* arg);
 		void receiveMessage(const void* pSender, std::string& msg);
 		void run();
 	};

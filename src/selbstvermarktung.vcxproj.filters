@@ -24,6 +24,9 @@
     <ClCompile Include="workers.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cxxopts.hpp">
@@ -36,6 +39,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="targets.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="simpleini.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="worm.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
