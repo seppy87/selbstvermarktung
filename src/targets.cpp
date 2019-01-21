@@ -15,4 +15,24 @@ void SendConsumptionRequestTarget::onEvent(const void* pSender, events::EvArgs& 
 		((workers::basic*)pSender)->receiveMessage(arg.ErrorMessage);
 }
 
-void ReducePowerTarget::onEvent(const void* pSender, USHORT& arg){}
+void ReducePowerTarget::onEvent(const void* pSender, USHORT& arg)
+{
+#ifdef _RPi
+	switch (arg) {
+	case 100:
+		digitalWrite(config::config::output[3], 1);
+	case 75:
+		digitalWrite(config::config::output[2], 1);
+	case 50:
+		digitalWrite(config::config::output[1], 1);
+	case 25:
+		digitalWrite(config::config::output[0], 1);
+		break;
+	default:
+		digitalWrite(config::config::output[3], 0);
+		digitalWrite(config::config::output[2], 0);
+		digitalWrite(config::config::output[1], 0);
+		digitalWrite(config::config::output[0], 0);
+	}
+#endif
+}

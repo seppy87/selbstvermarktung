@@ -1,6 +1,8 @@
 #pragma once
 
 #include<exception>
+#include<string>
+#include<array>
 #include<functional>
 
 namespace worm {
@@ -31,4 +33,6 @@ namespace worm {
 
 		operator T() const { return value; }
 	};
+
+	
 }

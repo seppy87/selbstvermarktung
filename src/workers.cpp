@@ -1,5 +1,10 @@
 #include"workers.hpp"
 #include<iostream>
+#include<exception>
+
+#ifdef _RPi
+	#include<wiringPi.h>
+#endif
 
 
 using namespace workers;
@@ -15,21 +20,30 @@ void Netzbetreiber::receiveMessage(const void* pSender,std::string& msg) {
 	}
 }
 
+void Netzbetreiber::initPins() {
+#ifdef _RPi
+	if (wiringPiSetup() == -1)
+		throw new std::exception("Library wiringPi Init failed!");
+	for (auto i : this->input) {
+		pinMode(i, INPUT);
+	}
+	for(auto o : this->output){
+		pinMode(o, OUTPUT);
+
+#endif
+}
+
 void Netzbetreiber::run() {
 	this->prEvent.theEvent += Poco::delegate(&this->redPower, &target::ReducePowerTarget::onEvent);
 	std::array<bool, 4> temp;
 	while (this->quitRequest == false && this->ErrorAbort == false) {
-		//Lese die GPIO vom Raspberry ein!
-		std::array<bool, 4> reg;
-		/*
-		reg = _CODE_FOR_READING_GPIO!*/
-		/*
-		if(reg != temp){
-			auto value = this->getPercentage(reg);
-			this->prEvent.InputReceived(value);
-			temp = reg;
-		}
-		*/
+#ifdef _RPi
+		//read All Inputs
+		int i1 = digitalRead(input[0]);
+		int i2 = digitalRead(input[1]);
+		int i3 = digitalRead(input[2]);
+		int i4 = digitalRead(input[3]);
+#endif
 		Sleep(1500);
 	}
 }

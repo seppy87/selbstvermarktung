@@ -12,16 +12,21 @@ namespace workers {
 		virtual void run() = 0;
 	};
 
-	class Netzbetreiber : public basic {
+	class Netzbetreiber : public Poco::Runnable {
 	private:
 		events::PowerRequestInputEvent prEvent;
 		target::ReducePowerTarget redPower;
+		const std::array<USHORT, 4> input;
+		const std::array<USHORT, 4> output;
+		unsigned int former = 0;
 	protected:
 		bool ErrorAbort = false;
 		bool quitRequest = false;
 	protected:
 		UINT16 getPercentage(const std::array<bool, 4> &arg);
+		void initPins();
 	public:
+		Netzbetreiber(std::array<USHORT,4> in, std::array<USHORT,4> out) : input(in) , output(out){}
 		void receiveMessage(const void* pSender, std::string& msg);
 		void run();
 	};
