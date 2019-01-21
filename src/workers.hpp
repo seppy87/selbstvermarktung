@@ -18,7 +18,7 @@ namespace workers {
 		target::ReducePowerTarget redPower;
 		const std::array<USHORT, 4> input;
 		const std::array<USHORT, 4> output;
-		unsigned int former = 0;
+		std::array<bool, 4> former = { 0,0,0,0 };
 	protected:
 		bool ErrorAbort = false;
 		bool quitRequest = false;

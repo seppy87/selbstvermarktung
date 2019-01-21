@@ -27,9 +27,9 @@ void Netzbetreiber::initPins() {
 	for (auto i : this->input) {
 		pinMode(i, INPUT);
 	}
-	for(auto o : this->output){
+	for (auto o : this->output) {
 		pinMode(o, OUTPUT);
-
+	}
 #endif
 }
 
@@ -39,13 +39,20 @@ void Netzbetreiber::run() {
 	while (this->quitRequest == false && this->ErrorAbort == false) {
 #ifdef _RPi
 		//read All Inputs
-		int i1 = digitalRead(input[0]);
-		int i2 = digitalRead(input[1]);
-		int i3 = digitalRead(input[2]);
-		int i4 = digitalRead(input[3]);
+		std::array<bool, 4> i;
+		i[0] = digitalRead(input[0]) > 0 ? true : false;
+		i[1] = digitalRead(input[1]) > 0 ? true : false;
+		i[2] = digitalRead(input[2]) > 0 ? true : false;
+		i[3] = digitalRead(input[3]) > 0 ? true : false;
+		
+		if (i != former) {
+			this->prEvent.inputReceived(this->getPercentage(i));
+			former = i;
+		}
 #endif
 		Sleep(1500);
 	}
+	//auto x = this->former == temp ? true : false;
 }
 
 UINT16 Netzbetreiber::getPercentage(const std::array<bool, 4>& arg) {
