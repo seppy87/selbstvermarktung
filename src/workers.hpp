@@ -44,6 +44,7 @@ namespace workers {
 	public:
 		NeXt(void* arg);
 		void receiveMessage(const void* pSender, std::string& msg);
+		static float measurekWh();
 		void run();
 	};
 }

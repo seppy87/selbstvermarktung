@@ -103,6 +103,23 @@ void NeXt::run() {
 	for (;;) {
 		do {
 			rc = modbus_receive(mb, query);
+			if (query[12] == 1 || query[12] == 0) {
+				if (query[12] == 1) {
+					this->redEvent.InputReceived(query[10]);
+					continue;
+				}
+				events::EvArgs args;
+				args.target = mb;
+				auto f = NeXt::measurekWh();
+				if (f == 0) {
+					args.occuredError = true;
+				}
+				else {
+					args.occuredError = false;
+				}
+				args.readPower = f;
+				this->prResult.InputReceived(args);
+			}
 			std::cout << "RC=" << rc << std::endl; //DEBUG
 		} while (rc == 0);
 		if (rc == -1 && errno != EMBBADCRC) break;
@@ -132,7 +149,7 @@ void NeXt::run() {
 				};
 
 				printf("Reply with an invalid TID or slave\n");
-				modbus_send_raw_request(ctx, raw_req, RAW_REQ_LENGTH * sizeof(uint8_t));
+				modbus_send_raw_request(mb, raw_req, RAW_REQ_LENGTH * sizeof(uint8_t));
 				continue;
 			}
 			else if (MODBUS_GET_INT16_FROM_INT8(query, header_length + 1)
@@ -187,4 +204,10 @@ void NeXt::receiveMessage(const void* pSender, std::string& msg) {
 		this->quitRequest = true;
 		return;
 	}
+}
+
+float NeXt::measurekWh() {
+	float erg = 0;
+	//Script to read D0 here
+	return 0;
 }

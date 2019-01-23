@@ -70,7 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\User\Desktop\libmodbus-master\src;C:\Users\User\Desktop\poco-poco-1.9.0-release\Foundation\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\User\Desktop\libmodbus-master\src;C:\Users\User\Desktop\poco-poco-1.9.0-release\total;$(IncludePath)</IncludePath>
+    <ReferencePath>C:\Users\User\Desktop\poco-poco-1.9.0-release\bin64;$(ReferencePath)</ReferencePath>
+    <LibraryPath>C:\Users\User\Desktop\poco-poco-1.9.0-release\lib64;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\Users\User\Desktop\poco-poco-1.9.0-release\bin64;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -118,6 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="config.cpp" />
+    <ClCompile Include="httpserver.cpp" />
     <ClCompile Include="Quelle.cpp" />
     <ClCompile Include="targets.cpp" />
     <ClCompile Include="workers.cpp" />
@@ -126,6 +130,7 @@
     <ClInclude Include="config.hpp" />
     <ClInclude Include="cxxopts.hpp" />
     <ClInclude Include="events.hpp" />
+    <ClInclude Include="httpserver.hpp" />
     <ClInclude Include="simpleini.h" />
     <ClInclude Include="targets.hpp" />
     <ClInclude Include="workers.hpp" />

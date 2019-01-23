@@ -30,6 +30,9 @@
     <ClCompile Include="config.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="httpserver.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cxxopts.hpp">
@@ -51,6 +54,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="config.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="httpserver.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
